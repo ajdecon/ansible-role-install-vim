@@ -4,4 +4,4 @@
   tasks:
     - name: "Include install-vim"
       include_role:
-        name: "install-vim"
+        name: "ansible-role-install-vim"
