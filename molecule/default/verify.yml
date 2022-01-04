@@ -1,0 +1,23 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  tasks:
+  - name: gather package facts
+    package_facts:
+
+  - name: verify vim package is installed
+    assert:
+      that:
+        - "'vim' in ansible_facts.packages"
+
+  - name: check for path to vim
+    command: which vim
+    register: which_vim
+    changed_when: which_vim.rc != 0
+
+  - name: verify path to vim
+    assert:
+      that:
+        - "'/usr/bin/vim' in which_vim.stdout"
